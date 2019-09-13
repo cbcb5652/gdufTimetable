@@ -6,7 +6,7 @@
   ![image](https://github.com/cbcb5652/gdufTimetable/blob/master/weibangding.jpg)  
   未绑定时候的页面    
   ![image](https://github.com/cbcb5652/gdufTimetable/blob/master/shoye.jpg)    
-  绑定后的页面:
+  绑定后的页面:  
  ![image](https://github.com/cbcb5652/gdufTimetable/blob/master/bangdinghou.jpg)  
  课表显示页面:  
  ![image](https://github.com/cbcb5652/gdufTimetable/blob/master/kebiao.jpg)  
