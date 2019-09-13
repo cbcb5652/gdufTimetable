@@ -1,0 +1,79 @@
+<!--index.wxml-->
+
+<view class="container">
+    <view class="fix_tip {{offline?'active':''}}">
+        <text>离线缓存模式</text>
+    </view>
+  <view class="selection" >
+      <swiper indicator-dots="true"
+      autoplay="true" interval="3000" duration="1000">
+          <block wx:for="{{imgUrls}}">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image"/>
+            </swiper-item>
+          </block>
+      </swiper>
+    </view>
+  <!--功能导航-->
+  <swiper class="main-swpier" indicator-dots="true" indicator-active-color="#73b4ef">
+  <swiper-item class="main-core" wx:for="{{cores}}"  wx:for-item="core" wx:key="id"  >
+    <block wx:for="{{core}}" wx:key="id">
+      <navigator wx:if="" class="main-core-item" url="../logs/logs">
+        <image class="core-item-icon" src="../logs/logs"></image>
+        <text class="core-item-name">{{item.name}}</text>
+      </navigator>
+      <view wx:else class="main-core-item disabled" bindtap="disabled_item" id="{{item.id}}"> 
+        <image class="core-item-icon" src="/images/core/{{item.id}}@disabled.png"></image>
+        <text class="core-item-name">{{item.name}}</text>
+      </view>
+    </block>
+  </swiper-item >
+  </swiper>
+   <view class='eventDetail shadowBlock'>
+    <view class='titleBar'>
+      <text class='title'>{{detail.title}}</text>
+      <text class='remark'>{{detail.remark}}</text>
+    </view>
+    <view class='detailBar'>
+      <view class='detail-top'>{{detail.loopMode == consts.unLoopModeValue?'距结束':'距下次'}}</view>
+      <view class='detail-middle'>
+        <view wx:if="{{detail.typeId==consts.eventType_Date}}">
+          <em class='appForeground'>{{detail.endDays}}</em>天</view>
+        <view wx:if="{{detail.typeId==consts.eventType_Tick}}">
+          <em class='appForeground'>{{detail.endTicks-detail.tickList.length}}</em>次</view>
+      </view>
+      <view class='detail-bottom'>
+        <text wx:if="{{detail.typeId==consts.eventType_Date&&detail.loopMode==consts.unLoopModeValue}}" class='tag'>截止于{{detail.endDate}}</text>
+        <text wx:if="{{detail.typeId==consts.eventType_Date&&detail.loopMode!==consts.unLoopModeValue}}" class='tag'>{{loopDisplay}}</text>
+        <text wx:if="{{detail.typeId==consts.eventType_Tick}}" class='tag'>共{{detail.endTicks}}次</text>
+        <text wx:if='{{detail.autoReserve}}' class='tag'>自动删除</text>
+      </view>
+    </view>
+
+
+
+
+
+    
+    <view class='operationBar' wx:if='{{!isAppInShareScene}}'>
+    
+      <view class='left' wx:if="{{detail.typeId==consts.eventType_Tick}}">
+        <image src='/images/coin/tick.png' class='operationItem img' bindtap='onTickTapped'></image>
+        <view class='operationItem' wx:if="{{detail.tickList.length>0}}" bindtap='onTickHisTapped'>
+          <template is='numberedImage' data='{{imgUrl:"/images/coin/tick-his.png",numberValue:detail.tickList.length}}' />
+        </view>
+      </view>
+      <!--An empty view place to make the right view could place on the right when the left view donot display-->
+      <view></view>
+      <view class='right'>
+        <image src='/images/coin/delete.png' class='operationItem img' bindtap='onDeleteTapped'></image>
+        <image src='/images/coin/edit.png' class='operationItem img' bindtap='onEditTapped'></image>
+      </view>
+    </view>
+  </view>
+  <view>
+   <button size="mini" type="default"  plain="true" class='form-code-btn' bindtap='sendCode' style='color:{{color}}; border-color: {{color}};background-color:#FFF;' disabled="{{disabled}}">{{time}}</button>
+
+  </view>
+
+</view>
